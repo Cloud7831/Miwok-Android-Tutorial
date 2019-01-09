@@ -41,6 +41,10 @@ public class NumbersFragment extends Fragment{
         }
     };
 
+    public NumbersFragment(){
+        // Required empty public constructor
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.word_list, container, false);
@@ -61,8 +65,6 @@ public class NumbersFragment extends Fragment{
         words.add(new Word("eight", "wakinta", R.raw.number_eight, R.drawable.number_eight));
         words.add(new Word("nine", "wo'e", R.raw.number_nine, R.drawable.number_nine));
         words.add(new Word("ten", "na'aacha", R.raw.number_ten, R.drawable.number_ten));
-
-
 
         WordAdapter itemsAdapter = new WordAdapter(getActivity(), words, R.color.category_numbers);
 

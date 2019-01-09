@@ -16,10 +16,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class PhrasesFragment extends Fragment {
+public class ColoursFragment extends Fragment {
 
     private MediaPlayer mp;
     private MediaPlayer.OnCompletionListener completionListener = new MediaPlayer.OnCompletionListener() {
@@ -32,22 +29,20 @@ public class PhrasesFragment extends Fragment {
     private AudioManager.OnAudioFocusChangeListener afChangeListener = new AudioManager.OnAudioFocusChangeListener() {
         @Override
         public void onAudioFocusChange(int i) {
-            if(i == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ||
-                    i == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK){
+            if (i == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ||
+                    i == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
                 mp.pause();
                 mp.seekTo(0); //If our sound gets cut off for a small amount, we would want to play the sound from the beginning, because our sound is small.
-            }
-            else if(i == AudioManager.AUDIOFOCUS_LOSS){
+            } else if (i == AudioManager.AUDIOFOCUS_LOSS) {
                 releaseMediaPlayer();
-            }
-            else if(i == AudioManager.AUDIOFOCUS_GAIN){
+            } else if (i == AudioManager.AUDIOFOCUS_GAIN) {
                 mp.start(); //Start is the same as resume. You'll continue where you left off, if needed.
             }
         }
     };
 
 
-    public PhrasesFragment(){
+    public ColoursFragment(){
         // Required empty public constructor
     }
 
@@ -57,25 +52,24 @@ public class PhrasesFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.word_list, container, false);
 
         am = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
+
         //Array of words
 
-        final ArrayList<Word> words = new ArrayList<>();
-        words.add(new Word("Where are you going?", "minto wuksus", R.raw.phrase_where_are_you_going));
-        words.add(new Word("What is your name?", "tinnә oyaase'nә", R.raw.phrase_what_is_your_name));
-        words.add(new Word("My name is...", "oyaaset...", R.raw.phrase_my_name_is));
-        words.add(new Word("How are you feeling?", "michәksәs?", R.raw.phrase_how_are_you_feeling));
-        words.add(new Word("I’m feeling good.", "kuchi achit", R.raw.phrase_im_feeling_good));
-        words.add(new Word("Are you coming?", "әәnәs'aa?", R.raw.phrase_are_you_coming));
-        words.add(new Word("Yes, I’m coming.", "hәә’ әәnәm", R.raw.phrase_yes_im_coming));
-        words.add(new Word("I’m coming.", "әәnәm", R.raw.phrase_im_coming));
-        words.add(new Word("Let’s go.", "yoowutis", R.raw.phrase_lets_go));
-        words.add(new Word("Come here.", "әnni'nem", R.raw.phrase_come_here));
+        final ArrayList<Word> words = new ArrayList<Word>();
+        words.add(new Word("red", "weṭeṭṭi", R.raw.color_red, R.drawable.color_red));
+        words.add(new Word("mustard yellow", "chiwiiṭә", R.raw.color_mustard_yellow, R.drawable.color_mustard_yellow));
+        words.add(new Word("dusty yellow", "ṭopiisә", R.raw.color_dusty_yellow, R.drawable.color_dusty_yellow));
+        words.add(new Word("green", "chokokki", R.raw.color_green, R.drawable.color_green));
+        words.add(new Word("brown", "ṭakaakki", R.raw.color_brown, R.drawable.color_brown));
+        words.add(new Word("gray", "ṭopoppi", R.raw.color_gray, R.drawable.color_gray));
+        words.add(new Word("black", "kululli", R.raw.color_black, R.drawable.color_black));
+        words.add(new Word("white", "kelelli", R.raw.color_white, R.drawable.color_white));
 
 
         Log.i("MyActivity", "Word at index 5: " + words.get(5));
 
 
-        WordAdapter itemsAdapter = new WordAdapter(getActivity(), words, R.color.category_phrases);
+        WordAdapter itemsAdapter = new WordAdapter(getActivity(), words, R.color.category_colours);
 
         ListView listView = (ListView) rootView.findViewById(R.id.list);
 
@@ -86,16 +80,19 @@ public class PhrasesFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 releaseMediaPlayer();
                 int result = am.requestAudioFocus(afChangeListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
-                if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED){
+
+                if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
                     mp = MediaPlayer.create(getActivity(), words.get(i).getAudioResourceID());
                     mp.start();
                     mp.setOnCompletionListener(completionListener);
-                }
+                    }
             }
-        });
+        }
+
+        );
+
         return rootView;
     }
-
 
     /**
      * Clean up the media player by releasing its resources.
@@ -117,8 +114,9 @@ public class PhrasesFragment extends Fragment {
     }
 
     @Override
-    public void onStop(){
+    public void onStop() {
         releaseMediaPlayer();
         super.onStop();
     }
+
 }
