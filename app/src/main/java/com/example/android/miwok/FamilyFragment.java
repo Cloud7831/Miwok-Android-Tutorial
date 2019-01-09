@@ -1,20 +1,23 @@
 package com.example.android.miwok;
 
+
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class NumbersFragment extends Fragment{
+public class FamilyFragment extends Fragment {
+
 
     private MediaPlayer mp;
     private MediaPlayer.OnCompletionListener completionListener = new MediaPlayer.OnCompletionListener() {
@@ -45,26 +48,29 @@ public class NumbersFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.word_list, container, false);
 
+        super.onCreate(savedInstanceState);
 
         am = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
 
-
         //Array of words
+
         final ArrayList<Word> words = new ArrayList<Word>();
-        words.add(new Word("one", "lutti", R.raw.number_one, R.drawable.number_one));
-        words.add(new Word("two", "otiiko", R.raw.number_two, R.drawable.number_two));
-        words.add(new Word("three", "tolookosu", R.raw.number_three, R.drawable.number_three));
-        words.add(new Word("four", "oyyisa", R.raw.number_four, R.drawable.number_four));
-        words.add(new Word("five", "massokka", R.raw.number_five, R.drawable.number_five));
-        words.add(new Word("six", "temmokka", R.raw.number_six, R.drawable.number_six));
-        words.add(new Word("seven", "kenekaku", R.raw.number_seven, R.drawable.number_seven));
-        words.add(new Word("eight", "wakinta", R.raw.number_eight, R.drawable.number_eight));
-        words.add(new Word("nine", "wo'e", R.raw.number_nine, R.drawable.number_nine));
-        words.add(new Word("ten", "na'aacha", R.raw.number_ten, R.drawable.number_ten));
+        words.add(new Word("father", "әpә", R.raw.family_father, R.drawable.family_father));
+        words.add(new Word("mother", "әṭa", R.raw.family_mother, R.drawable.family_mother));
+        words.add(new Word("son", "angsi", R.raw.family_son, R.drawable.family_son));
+        words.add(new Word("daughter", "tune", R.raw.family_daughter, R.drawable.family_daughter));
+        words.add(new Word("older brother", "taachi", R.raw.family_older_brother, R.drawable.family_older_brother));
+        words.add(new Word("younger brother", "chalitti", R.raw.family_younger_brother, R.drawable.family_younger_brother));
+        words.add(new Word("older sister", "teṭe", R.raw.family_older_sister, R.drawable.family_older_sister));
+        words.add(new Word("younger sister", "kolliti", R.raw.family_younger_sister, R.drawable.family_younger_sister));
+        words.add(new Word("grandmother ", "ama", R.raw.family_grandmother, R.drawable.family_grandmother));
+        words.add(new Word("grandfather", "paapa", R.raw.family_grandfather, R.drawable.family_grandfather));
 
 
+        Log.i("MyActivity", "Word at index 5: " + words.get(5));
 
-        WordAdapter itemsAdapter = new WordAdapter(getActivity(), words, R.color.category_numbers);
+
+        WordAdapter itemsAdapter = new WordAdapter(getActivity(), words, R.color.category_family);
 
         ListView listView = (ListView) rootView.findViewById(R.id.list);
 
@@ -74,7 +80,6 @@ public class NumbersFragment extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 releaseMediaPlayer();
-
                 int result = am.requestAudioFocus(afChangeListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
 
                 if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED){
@@ -87,8 +92,6 @@ public class NumbersFragment extends Fragment{
 
         return rootView;
     }
-
-
 
     /**
      * Clean up the media player by releasing its resources.
@@ -114,4 +117,12 @@ public class NumbersFragment extends Fragment{
         releaseMediaPlayer();
         super.onStop();
     }
+
+
+//
+//    public FamilyFragment() {
+//        // Required empty public constructor
+//    }
+
+
 }
