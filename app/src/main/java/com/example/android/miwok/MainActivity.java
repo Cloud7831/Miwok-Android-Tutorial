@@ -20,6 +20,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -35,43 +37,52 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Set onClickListeners
+        // Find the view pager that will allow the user to swipe between fragments
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
-        TextView numbersView = (TextView)findViewById(R.id.numbers);
-        numbersView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, NumbersActivity.class);
-                startActivity(intent);
-            }
-        });
+        // Create an adapter that knows which fragment should be shown on each page
+        MainPagerAdapter adapter = new MainPagerAdapter(getSupportFragmentManager());
 
-        TextView familyView = (TextView)findViewById(R.id.family);
-        familyView.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent intent = new Intent(MainActivity.this, FamilyActivity.class);
-                startActivity(intent);
-            }
-        });
+        // Set the adapter onto the view pager
+        viewPager.setAdapter(adapter);
 
-        TextView coloursView = (TextView)findViewById(R.id.colours);
-        coloursView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, ColoursActivity.class);
-                startActivity(i);
-            }
-        });
 
-        TextView phrasesView = (TextView)findViewById(R.id.phrases);
-        phrasesView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, PhrasesActivity.class);
-                startActivity(i);
-            }
-        });
+//        //Set onClickListeners
+//        TextView numbersView = (TextView)findViewById(R.id.numbers);
+//        numbersView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this, NumbersActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        TextView familyView = (TextView)findViewById(R.id.family);
+//        familyView.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view){
+//                Intent intent = new Intent(MainActivity.this, FamilyActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        TextView coloursView = (TextView)findViewById(R.id.colours);
+//        coloursView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent(MainActivity.this, ColoursActivity.class);
+//                startActivity(i);
+//            }
+//        });
+//
+//        TextView phrasesView = (TextView)findViewById(R.id.phrases);
+//        phrasesView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent(MainActivity.this, PhrasesActivity.class);
+//                startActivity(i);
+//            }
+//        });
 
 
     }
