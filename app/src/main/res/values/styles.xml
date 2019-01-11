@@ -30,4 +30,11 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
     </style>
+
+    <style name="MainTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabTextColor">@color/dark_text</item>
+        <item name="tabBackground">@color/primary_color</item>
+        <item name="tabIndicatorColor">@color/colour_white</item>
+        <item name="tabSelectedTextColor">@color/colour_white</item>
+    </style>
 </resources>
