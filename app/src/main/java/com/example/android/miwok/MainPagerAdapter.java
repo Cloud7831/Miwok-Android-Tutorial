@@ -1,15 +1,17 @@
 package com.example.android.miwok;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 public class MainPagerAdapter extends FragmentPagerAdapter {
     final int TAB_COUNT = 4; // number of tabs on our main page
-    private String tabTitles[] = new String[] {"Numbers", "Family", "Colours", "Phrases"};
+    private Context context;
 
-    public MainPagerAdapter(FragmentManager fm){
+    public MainPagerAdapter(FragmentManager fm, Context c){
         super(fm);
+        context = c;
     }
 
 
@@ -38,6 +40,17 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position){
         // Generate title based on item position
-        return tabTitles[position];
+        if (position == 0){
+            return context.getString(R.string.category_numbers);
+        }
+        else if (position == 1){
+            return context.getString(R.string.category_family);
+        }
+        else if (position == 2){
+            return context.getString(R.string.category_colours);
+        }
+        else {
+            return context.getString(R.string.category_phrases);
+        }
     }
 }

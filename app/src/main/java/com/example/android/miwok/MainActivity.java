@@ -38,11 +38,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // This is to remove the shadow on the support action bar.
+        getSupportActionBar().setElevation(0);
+        getSupportActionBar().hide();
+
         // Find the view pager that will allow the user to swipe between fragments
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
         // Create an adapter that knows which fragment should be shown on each page
-        MainPagerAdapter adapter = new MainPagerAdapter(getSupportFragmentManager());
+        MainPagerAdapter adapter = new MainPagerAdapter(getSupportFragmentManager(), this);
 
         // Set the adapter onto the view pager
         viewPager.setAdapter(adapter);
